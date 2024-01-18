@@ -23,7 +23,7 @@ import { Subject, takeUntil } from 'rxjs';
 
             @media (screen and min-width: 1280px) {
 
-                empty-layout + settings .settings-cog {
+                .settings-cog {
                     right: 0 !important;
                 }
             }

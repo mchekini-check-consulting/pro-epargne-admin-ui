@@ -15,7 +15,7 @@
         <div class="flex items-center justify-center h-20 mt-3 mb-4">
             <img
                 class="w-10"
-                src="assets/images/logo/logo.svg"
+                src="assets/images/logo/logo.png"
                 alt="Logo image">
         </div>
     </ng-container>
@@ -37,15 +37,7 @@
             <languages></languages>
             <fuse-fullscreen class="hidden md:block"></fuse-fullscreen>
             <search [appearance]="'bar'"></search>
-            <shortcuts></shortcuts>
-            <messages></messages>
             <notifications></notifications>
-            <button
-                class="lg:hidden"
-                mat-icon-button
-                (click)="quickChat.toggle()">
-                <mat-icon [svgIcon]="'heroicons_outline:chat-bubble-left-right'"></mat-icon>
-            </button>
             <user></user>
         </div>
     </div>
@@ -59,10 +51,7 @@
 
     <!-- Footer -->
     <div class="relative flex flex-0 items-center justify-start w-full h-14 px-4 md:px-6 z-49 border-t bg-card dark:bg-transparent print:hidden">
-        <span class="font-medium text-secondary">Fuse &copy; {{currentYear}}</span>
+        <span class="font-medium text-secondary">Check Consulting &copy; {{currentYear}}</span>
     </div>
 
 </div>
-
-<!-- Quick chat -->
-<quick-chat #quickChat="quickChat"></quick-chat>
