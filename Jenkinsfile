@@ -1,7 +1,7 @@
 node("ci-node") {
 
     stage("Checkout") {
-        checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/mchekini-check-consulting/pro-epargne-admin-ui']])}
+        checkout scmGit(branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/mchekini-check-consulting/pro-epargne-admin-ui']])}
 
 
     stage("Build") {
