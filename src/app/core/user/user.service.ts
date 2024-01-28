@@ -1,13 +1,13 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { User } from 'app/core/user/user.types';
-import { map, Observable, ReplaySubject, tap } from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {inject, Injectable} from '@angular/core';
+import {User} from 'app/core/user/user.types';
+import {map, Observable, ReplaySubject, tap} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class UserService
 {
     private _httpClient = inject(HttpClient);
-    private _user: ReplaySubject<User> = new ReplaySubject<User>(1);
+    public _user: ReplaySubject<User> = new ReplaySubject<User>(1);
 
     // -----------------------------------------------------------------------------------------------------
     // @ Accessors

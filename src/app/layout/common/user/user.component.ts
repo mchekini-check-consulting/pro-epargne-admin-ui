@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'app/core/user/user.service';
 import { User } from 'app/core/user/user.types';
 import { Subject, takeUntil } from 'rxjs';
+import {OAuthService} from "angular-oauth2-oidc";
 
 @Component({
     selector       : 'user',
@@ -37,6 +38,7 @@ export class UserComponent implements OnInit, OnDestroy
         private _changeDetectorRef: ChangeDetectorRef,
         private _router: Router,
         private _userService: UserService,
+        private oauthService: OAuthService
     )
     {
     }
@@ -101,6 +103,6 @@ export class UserComponent implements OnInit, OnDestroy
      */
     signOut(): void
     {
-        this._router.navigate(['/sign-out']);
+        this.oauthService.logOut();
     }
 }
