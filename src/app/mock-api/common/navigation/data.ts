@@ -10,6 +10,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon    : 'heroicons_outline:home',
         children: [
             {
+                id   : 'features.collaborator',
+                title: 'collaborator',
+                type : 'basic',
+                icon : 'heroicons_outline:users',
+                link : '/features/collaborator',
+            },
+            {
                 id   : 'features.feature1',
                 title: 'Feature1',
                 type : 'basic',

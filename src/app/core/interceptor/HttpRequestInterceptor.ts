@@ -1,7 +1,7 @@
-import {HttpEvent, HttpInterceptorFn, HttpResponse} from '@angular/common/http';
-import {map} from 'rxjs';
-import {OAuthService} from "angular-oauth2-oidc";
-import {inject} from "@angular/core";
+import { HttpEvent, HttpInterceptorFn, HttpResponse } from '@angular/common/http';
+import { inject } from "@angular/core";
+import { OAuthService } from "angular-oauth2-oidc";
+import { map } from 'rxjs';
 
 export const HttpRequestInterceptor: HttpInterceptorFn = (req, next) => {
 
@@ -19,8 +19,8 @@ export const HttpRequestInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req).pipe(
         map((event: HttpEvent<any>) => {
             if (event instanceof HttpResponse) {
-                if (event.body && event.body.payload) {
-                    event = event.clone({body: event.body.payload});
+                if (event.body && event.body.data) {
+                    event = event.clone({body: event.body.data});
                 } else {
                     event = event.clone({body: event.body});
                 }

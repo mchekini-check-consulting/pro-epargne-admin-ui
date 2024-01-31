@@ -25,6 +25,7 @@ export const appRoutes: Route[] = [
                 {path: 'contract', loadChildren: () => import('@/modules/admin/features/contract/container/contract.routes')},
                 {path: 'feature3', loadChildren: () => import('app/modules/admin/features/feature3/feature3.routes')},
                 {path: 'feature4', loadChildren: () => import('app/modules/admin/features/feature4/feature4.routes')},
+                {path: 'collaborator', loadChildren: () => import('app/modules/admin/features/collaborator/collaborator.routes')},
             ]},
 
             // Pages

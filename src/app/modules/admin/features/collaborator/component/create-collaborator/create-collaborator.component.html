@@ -1,0 +1,109 @@
+<h2 mat-dialog-title>Ajouter un employé</h2>
+<mat-dialog-content class="mat-typography">
+    <form
+        [formGroup]="formData"
+        class="collaborator-form"
+        (submit)="submitData()"
+    >
+        <div class="collaborator-form__field-wrapper">
+            <mat-form-field>
+                <mat-label>Nom</mat-label>
+                <input matInput placeholder="Nom" formControlName="lastName" />
+                <mat-error>Le nom est requis.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Prénom</mat-label>
+                <input
+                    matInput
+                    placeholder="Prénom"
+                    formControlName="firstName"
+                />
+                <mat-error>Le prénom est requis.</mat-error>
+            </mat-form-field>
+
+            <section>
+                <mat-label>Genre</mat-label>
+                <mat-radio-group
+                    formControlName="gender"
+                    class="flex justify-start items-center"
+                >
+                    <mat-radio-button class="example-margin" value="homme">
+                        Homme
+                    </mat-radio-button>
+                    <mat-radio-button class="example-margin" value="femme">
+                        Femme
+                    </mat-radio-button>
+                </mat-radio-group>
+            </section>
+
+            <mat-form-field>
+                <mat-label>Date de naissance</mat-label>
+                <input
+                    matInput
+                    [matDatepicker]="birthDate_picker"
+                    formControlName="birthDate"
+                />
+                <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="birthDate_picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #birthDate_picker></mat-datepicker>
+                <mat-error>La date de naissance est requise.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>{{ "Date d'entrée" }}</mat-label>
+                <input
+                    matInput
+                    [matDatepicker]="entryDate_picker"
+                    formControlName="entryDate"
+                />
+                <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="entryDate_picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #entryDate_picker></mat-datepicker>
+                <mat-error>La date d'entrée est requise.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" formControlName="email" />
+                <mat-error *ngIf="email.hasError('required')">
+                    L'adresse e-mail est requise.
+                </mat-error>
+                <mat-error *ngIf="email.hasError('email')">
+                    Veuillez entrer une adresse e-mail valide.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Salaire brut</mat-label>
+                <input
+                    matInput
+                    type="number"
+                    placeholder="Salaire brut"
+                    formControlName="grossSalary"
+                />
+                <span matTextSuffix>€&nbsp;</span>
+                <mat-error>Le salaire brut est requis.</mat-error>
+            </mat-form-field>
+        </div>
+        <div mat-dialog-actions class="flex justify-end">
+            <button mat-button color="primary" type="submit">Save</button>
+        </div>
+    </form>
+    <h1
+        *ngIf="successMessage"
+        class="text-green-700 w-full text-center font-semibold"
+    >
+        {{ successMessage }}
+    </h1>
+    <h1
+        *ngIf="errorMessage"
+        class="text-red-700 w-full text-center font-semibold"
+    >
+        {{ errorMessage }}
+    </h1>
+</mat-dialog-content>
