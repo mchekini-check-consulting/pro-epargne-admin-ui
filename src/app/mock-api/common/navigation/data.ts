@@ -18,9 +18,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
             },
             {
                 id   : 'features.feature2',
-                title: 'Feature2',
+                title: 'Contrat',
                 type : 'basic',
-                icon : 'heroicons_outline:chart-pie',
+                icon : 'heroicons_outline:clipboard-document-check',
                 link : '/features/feature2',
             },
             {
