@@ -17,11 +17,11 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 link : '/features/feature1',
             },
             {
-                id   : 'features.feature2',
+                id   : 'features.contract',
                 title: 'Contrat',
                 type : 'basic',
                 icon : 'heroicons_outline:clipboard-document-check',
-                link : '/features/feature2',
+                link : '/features/contract',
             },
             {
                 id   : 'features.feature3',
