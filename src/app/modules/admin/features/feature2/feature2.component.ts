@@ -17,5 +17,9 @@ export class Feature2Component
     consultContract():void{
         this.router.navigate(['/features/feature2/consultContractScreen']);
     }
+
+    createContract():void{
+        this.router.navigate(['/features/feature2/create'])
+    }
     
 }
