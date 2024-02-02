@@ -9,46 +9,61 @@
                     <ng-template matStepLabel>Information sur l'entreprise</ng-template>
                     <div class="mt-2">
                         <mat-form-field class="w-2/3">
-                            <input matInput placeholder="Raison Social" type="text">
+                            <input matInput placeholder="Raison Social" type="text" formControlName="companyName">
                         </mat-form-field>
                     </div>
                     <div class="mt-2">
                         <mat-form-field class="w-2/3">
-                            <input matInput placeholder="Forme juridique" type="text">
+                            <input matInput placeholder="Forme juridique" type="text" formControlName="legalForm">
                         </mat-form-field>
                     </div>
                     <div class="mt-2">
                         <mat-form-field class="w-2/3">
-                            <input matInput placeholder="SIRET" type="text">
+                            <input matInput placeholder="SIRET" type="number" formControlName="siret">
                         </mat-form-field>
                     </div>
                     <div class="mt-2">
                         <mat-form-field class="w-2/3">
-                            <input matInput placeholder="Activité de l'entreprise" type="text">
+                            <input matInput placeholder="Activité de l'entreprise" type="text"
+                                formControlName="businessActivity">
                         </mat-form-field>
                     </div>
                     <div class="mt-2">
                         <mat-form-field class="w-2/3">
-                            <input matInput placeholder="Adresse de l'entreprise" type="text">
+                            <input matInput placeholder="Adresse de l'entreprise" type="text"
+                                formControlName="businessAddress">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="w-2/3">
-                            <!-- <mat-label>Choose a date</mat-label> -->
-                            <input matInput [matDatepicker]="picker" placeholder="Mois de clôture de l'exercice">
-                            <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                            <!-- <input matInput [matDatepicker]="picker" placeholder="Mois de clôture de l'exercice"
+                                formControlName="closingMonth">
                             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-datepicker #picker></mat-datepicker> -->
+                            <mat-select placeholder="Mois de clôture de l'exercice" formControlName="closingMonth">
+                                <mat-option value="1">Janvier</mat-option>
+                                <mat-option value="2">février</mat-option>
+                                <mat-option value="3">mars</mat-option>
+                                <mat-option value="4">Avril</mat-option>
+                                <mat-option value="5">Mai</mat-option>
+                                <mat-option value="6">Juin</mat-option>
+                                <mat-option value="7">juillet</mat-option>
+                                <mat-option value="8">août</mat-option>
+                                <mat-option value="9">septembre</mat-option>
+                                <mat-option value="10">octobre</mat-option>
+                                <mat-option value="11">novembre</mat-option>
+                                <mat-option value="12">décembre</mat-option>
+                            </mat-select>
                         </mat-form-field>
                     </div>
                     <div class="mt-2">
                         <mat-form-field class="w-2/3">
-                            <input matInput placeholder="Effectif" type="number">
+                            <input matInput placeholder="Effectif" type="number" formControlName="workforce">
                         </mat-form-field>
                     </div>
                     <div class="mt-2">
                         <mat-form-field class="w-2/3">
-                            <input matInput placeholder="Masse salariale" type="number">
+                            <input matInput placeholder="Masse salariale" type="number" formControlName="totalWage">
                         </mat-form-field>
                     </div>
 
@@ -61,17 +76,17 @@
             </mat-step>
 
             <mat-step [stepControl]="companySignatoryForm">
-                <form>
+                <form [formGroup]="companySignatoryForm">
                     <ng-template matStepLabel>Identité du signataire</ng-template>
                     <div class="flex">
                         <div class="w-1/2">
                             <mat-form-field class="w-2/3">
-                                <input matInput placeholder="Nom" type="text">
+                                <input matInput placeholder="Nom" type="text" formControlName="lastName">
                             </mat-form-field>
                         </div>
                         <div class="w-1/2">
                             <mat-form-field class="w-2/3">
-                                <input matInput placeholder="Prénom" type="text">
+                                <input matInput placeholder="Prénom" type="text" formControlName="firstName">
                             </mat-form-field>
                         </div>
                     </div>
@@ -79,12 +94,12 @@
                     <div class="flex">
                         <div class="w-1/2">
                             <mat-form-field class="w-2/3">
-                                <input matInput placeholder="Email" type="email">
+                                <input matInput placeholder="Email" type="email" formControlName="email">
                             </mat-form-field>
                         </div>
                         <div class="w-1/2">
                             <mat-form-field class="w-2/3">
-                                <input matInput placeholder="Téléphone" type="number">
+                                <input matInput placeholder="Téléphone" type="number" formControlName="phone">
                             </mat-form-field>
                         </div>
                     </div>
@@ -93,15 +108,16 @@
                         <div class="w-1/2">
                             <mat-form-field class="w-2/3">
                                 <!-- <mat-label>Choose a date</mat-label> -->
-                                <input matInput [matDatepicker]="picker" placeholder="Date de naissance">
+                                <input matInput [matDatepicker]="picker2" placeholder="Date de naissance"
+                                    formControlName="dateOfBirth">
                                 <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
-                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
                             </mat-form-field>
                         </div>
                         <div class="w-1/2">
                             <mat-form-field class="w-2/3">
-                                <input matInput placeholder="Fonction" type="text">
+                                <input matInput placeholder="Fonction" type="text" formControlName="jobTitle">
                             </mat-form-field>
 
                         </div>
@@ -109,45 +125,34 @@
 
                     <div>
                         <mat-form-field class="w-2/3">
-                            <input matInput placeholder="Numéro de sécurité social" type="text">
+                            <input matInput placeholder="Numéro de sécurité social" type="text"
+                                formControlName="socialSecurityNumber">
                         </mat-form-field>
                     </div>
 
                     <div class="flex">
                         <div class="w-1/2">
-                            <mat-form-field class="w-2/3">
-                                <!-- <mat-label>Pays de naissance</mat-label> -->
-                                <mat-select placeholder="Pays de naissance">
-                                    <mat-option>None</mat-option>
-                                    <mat-option value="option1">Option 1</mat-option>
-                                    <mat-option value="option2">Option 2</mat-option>
-                                    <mat-option value="option3">Option 3</mat-option>
-                                </mat-select>
-                            </mat-form-field>
+                            <mat-select-country label="Pays de naissance" placeHolder="Pays de naissance"
+                                formControlName="countryOfBirth" itemsLoadSize="4">
+                            </mat-select-country>
                         </div>
                         <div class="w-1/2">
-                            <mat-form-field class="w-2/3">
-                                <!-- <mat-label>Pays de résidence</mat-label> -->
-                                <mat-select placeholder="Pays de résidence">
-                                    <mat-option>None</mat-option>
-                                    <mat-option value="option1">Option 1</mat-option>
-                                    <mat-option value="option2">Option 2</mat-option>
-                                    <mat-option value="option3">Option 3</mat-option>
-                                </mat-select>
-                            </mat-form-field>
+                            <mat-select-country label="Pays de résidence" placeHolder="Pays de résidence"
+                                formControlName="countryOfResidence" itemsLoadSize="4">
+                            </mat-select-country>
                         </div>
                     </div>
 
                     <div class="mt-2">
-                        <mat-radio-group aria-label="Select an option">
+                        <mat-radio-group aria-label="Select an option" formControlName="executive">
                             <label for="">Le signataire est-il dirigeant? </label>
-                            <mat-radio-button value="1">oui</mat-radio-button>
-                            <mat-radio-button value="2">non</mat-radio-button>
+                            <mat-radio-button value="true">oui</mat-radio-button>
+                            <mat-radio-button value="false">non</mat-radio-button>
                         </mat-radio-group>
                     </div>
 
                     <div class="mt-2">
-                        <mat-radio-group aria-label="Select an option">
+                        <mat-radio-group aria-label="Select an option" formControlName="eligibility">
                             <label for="">Éligibilité au dispositif par ancienneté? </label>
                             <mat-radio-button value="1">1 moi</mat-radio-button>
                             <mat-radio-button value="2">2 mois</mat-radio-button>
@@ -161,15 +166,17 @@
                         </div>
 
                         <div class="w-2/3">
-                            <mat-checkbox class="example-margin" [(ngModel)]="peeChecked" name="df">PEE</mat-checkbox>
-                            <mat-checkbox class="example-margin" [(ngModel)]="percoChecked"
+                            <mat-checkbox class="example-margin" name="df"
+                                (change)="onPeeCheckedChange($event)">PEE</mat-checkbox>
+                            <mat-checkbox class="example-margin" (change)="onPercoCheckedChange($event)"
                                 name="rd">PERCO</mat-checkbox>
                         </div>
                     </div>
 
                     <div>
                         <button mat-raised-button color="primary mr-5" matStepperPrevious>précédent</button>
-                        <button mat-raised-button color="primary" matStepperNext>Suivant</button>
+                        <button mat-raised-button color="primary" matStepperNext
+                            [disabled]="noPlanSelected()">Suivant</button>
                     </div>
 
 
@@ -177,7 +184,7 @@
             </mat-step>
 
             <mat-step label="Configuration des plans">
-                <form>
+                <form [formGroup]="peeContributionForm">
 
                     <!-- PEE plan -->
                     <div *ngIf="peeChecked">
@@ -191,9 +198,12 @@
                             </div>
 
                             <div class="w-2/3">
-                                <mat-checkbox class="example-margin">sur sur l'intéressement</mat-checkbox>
-                                <mat-checkbox class="example-margin">sur les versements volontaires</mat-checkbox>
-                                <mat-checkbox class="example-margin">sur la participation</mat-checkbox>
+                                <mat-checkbox class="example-margin" formControlName="peeInterestAccepted">sur sur
+                                    l'intéressement</mat-checkbox>
+                                <mat-checkbox class="example-margin" formControlName="peeVoluntaryDepositAccepted">sur
+                                    les versements volontaires</mat-checkbox>
+                                <mat-checkbox class="example-margin" formControlName="peeProfitSharingAccepted">sur la
+                                    participation</mat-checkbox>
                             </div>
                         </div>
 
@@ -216,7 +226,7 @@
                             <div class="flex">
                                 <div class="w-1/2">
                                     <mat-form-field class="w-2/3">
-                                        <mat-select placeholder="Taux">
+                                        <mat-select placeholder="Taux" formControlName="rateSimpleContribution">
                                             <mat-option value="sm">50%</mat-option>
                                             <mat-option value="pl">100%</mat-option>
                                             <mat-option value="an">150%</mat-option>
@@ -229,7 +239,8 @@
                                 </div>
                                 <div class="w-1/2">
                                     <mat-form-field class="w-2/3">
-                                        <input matInput placeholder="Plafond" type="number">
+                                        <input matInput placeholder="Plafond" type="number"
+                                            formControlName="ceilingSimpleContribution">
                                     </mat-form-field>
 
                                 </div>
@@ -250,7 +261,40 @@
                                         <input matInput placeholder="De" type="number">€
                                     </mat-form-field>
                                     <mat-form-field class="w-1/2">
-                                        <input matInput placeholder="A" type="number">€
+                                        <input matInput placeholder="A" type="number"
+                                            formArrayName="intervalContributionFirst">€
+                                    </mat-form-field>
+                                </div>
+                                <div class="w-1/4">
+                                    <mat-form-field class="w-2/3">
+                                        <mat-select placeholder="Taux" formControlName="rateIntervalContributionFirst">
+                                            <mat-option value="50">50%</mat-option>
+                                            <mat-option value="100">100%</mat-option>
+                                            <mat-option value="150">150%</mat-option>
+                                            <mat-option value="200">200%</mat-option>
+                                            <mat-option value="250">250%</mat-option>
+                                            <mat-option value="300">300%</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                </div>
+                                <div class="w-1/4">
+                                    <mat-form-field class="w-1/2">
+                                        <input matInput placeholder="Plafond" type="number"
+                                            formControlName="ceilingIntervalContributionFirst">
+                                    </mat-form-field>
+
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="w-2/4 mr-2">
+
+                                    <mat-form-field class="w-1/2 pr-2">
+                                        <input matInput placeholder="De" type="number">€
+                                    </mat-form-field>
+                                    <mat-form-field class="w-1/2">
+                                        <input matInput placeholder="A" type="number"
+                                            formArrayName="intervalContributionSecond">€
                                     </mat-form-field>
                                 </div>
                                 <div class="w-1/4">
@@ -280,12 +324,13 @@
                                         <input matInput placeholder="De" type="number">€
                                     </mat-form-field>
                                     <mat-form-field class="w-1/2">
-                                        <input matInput placeholder="A" type="number">€
+                                        <input matInput placeholder="A" type="number"
+                                            formControlName="intervalContributionThird">€
                                     </mat-form-field>
                                 </div>
                                 <div class="w-1/4">
                                     <mat-form-field class="w-2/3">
-                                        <mat-select placeholder="Taux">
+                                        <mat-select placeholder="Taux" formControlName="rateIntervalContributionThird">
                                             <mat-option value="50">50%</mat-option>
                                             <mat-option value="100">100%</mat-option>
                                             <mat-option value="150">150%</mat-option>
@@ -298,37 +343,8 @@
                                 </div>
                                 <div class="w-1/4">
                                     <mat-form-field class="w-1/2">
-                                        <input matInput placeholder="Plafond" type="number">
-                                    </mat-form-field>
-
-                                </div>
-                            </div>
-                            <div class="flex">
-                                <div class="w-2/4 mr-2">
-
-                                    <mat-form-field class="w-1/2 pr-2">
-                                        <input matInput placeholder="De" type="number">€
-                                    </mat-form-field>
-                                    <mat-form-field class="w-1/2">
-                                        <input matInput placeholder="A" type="number">€
-                                    </mat-form-field>
-                                </div>
-                                <div class="w-1/4">
-                                    <mat-form-field class="w-2/3">
-                                        <mat-select placeholder="Taux">
-                                            <mat-option value="50">50%</mat-option>
-                                            <mat-option value="100">100%</mat-option>
-                                            <mat-option value="150">150%</mat-option>
-                                            <mat-option value="200">200%</mat-option>
-                                            <mat-option value="250">250%</mat-option>
-                                            <mat-option value="300">300%</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-
-                                </div>
-                                <div class="w-1/4">
-                                    <mat-form-field class="w-1/2">
-                                        <input matInput placeholder="Plafond" type="number">
+                                        <input matInput placeholder="Plafond" type="number"
+                                            formControlName="ceilingIntervalContributionThird">
                                     </mat-form-field>
 
                                 </div>
@@ -341,7 +357,7 @@
                             </div>
                             <div class="">
                                 <mat-form-field class="w-1/4">
-                                    <mat-select placeholder="Taux">
+                                    <mat-select placeholder="Taux" formControlName="rateSeniorityContribution">
                                         <mat-option value="sm">50%</mat-option>
                                         <mat-option value="pl">100%</mat-option>
                                         <mat-option value="an">150%</mat-option>
@@ -353,16 +369,20 @@
                             </div>
                             <div class="flex">
                                 <mat-form-field class="w-1/4 pr-2">
-                                    <input matInput placeholder="< 1 an" type="number">
+                                    <input matInput placeholder="< 1 an" type="number"
+                                        formControlName="ceilingSeniorityContributionLessYear">
                                 </mat-form-field>
                                 <mat-form-field class="w-1/4 pr-2">
-                                    <input matInput placeholder="1 à 3 ans" type="number">
+                                    <input matInput placeholder="1 à 3 ans" type="number"
+                                        formControlName="ceilingSeniorityContributionBetween1And3">
                                 </mat-form-field>
                                 <mat-form-field class="w-1/4 pr-2">
-                                    <input matInput placeholder="3 à 5 ans" type="number">
+                                    <input matInput placeholder="3 à 5 ans" type="number"
+                                        formControlName="ceilingSeniorityContributionBetween3And5">
                                 </mat-form-field>
                                 <mat-form-field class="w-1/4 pr-2">
-                                    <input matInput placeholder="> 5 ans" type="number">
+                                    <input matInput placeholder="> 5 ans" type="number"
+                                        formControlName="ceilingSeniorityContributionGreater5">
                                 </mat-form-field>
 
                             </div>
@@ -370,7 +390,9 @@
 
                     </div>
                     <!-- end of PEE plan -->
+                </form>
 
+                <form [formGroup]="percoContributionForm">
                     <!-- PERCO plan -->
                     <div *ngIf="percoChecked">
                         <mat-divider></mat-divider>
@@ -384,10 +406,14 @@
                             </div>
 
                             <div class="w-2/3">
-                                <mat-checkbox class="example-margin">sur sur l'intéressement</mat-checkbox>
-                                <mat-checkbox class="example-margin">sur les versements volontaires</mat-checkbox>
-                                <mat-checkbox class="example-margin">sur la participation</mat-checkbox>
-                                <mat-checkbox class="example-margin">Compte épargne temps</mat-checkbox>
+                                <mat-checkbox class="example-margin" formControlName="percoInterestAccepted">sur sur
+                                    l'intéressement</mat-checkbox>
+                                <mat-checkbox class="example-margin" formControlName="percoVoluntaryDepositAccepted">sur
+                                    les versements volontaires</mat-checkbox>
+                                <mat-checkbox class="example-margin" formControlName="percoProfitSharingAccepted">sur la
+                                    participation</mat-checkbox>
+                                <mat-checkbox class="example-margin"
+                                    formControlName="percoTimeSavingAccountAccepted">Compte épargne temps</mat-checkbox>
                             </div>
                         </div>
 
@@ -409,7 +435,7 @@
                             <div class="flex">
                                 <div class="w-1/2">
                                     <mat-form-field class="w-2/3">
-                                        <mat-select placeholder="Taux">
+                                        <mat-select placeholder="Taux" formControlName="rateIntervalContributionFirst">
                                             <mat-option value="sm">50%</mat-option>
                                             <mat-option value="pl">100%</mat-option>
                                             <mat-option value="an">150%</mat-option>
@@ -422,7 +448,8 @@
                                 </div>
                                 <div class="w-1/2">
                                     <mat-form-field class="w-2/3">
-                                        <input matInput placeholder="Plafond" type="number">
+                                        <input matInput placeholder="Plafond" type="number"
+                                            formControlName="ceilingIntervalContributionFirst">
                                     </mat-form-field>
 
                                 </div>
@@ -443,12 +470,13 @@
                                         <input matInput placeholder="De" type="number">€
                                     </mat-form-field>
                                     <mat-form-field class="w-1/2">
-                                        <input matInput placeholder="A" type="number">€
+                                        <input matInput placeholder="A" type="number"
+                                            formControlName="intervalContributionFirst">€
                                     </mat-form-field>
                                 </div>
                                 <div class="w-1/4">
                                     <mat-form-field class="w-2/3">
-                                        <mat-select placeholder="Taux">
+                                        <mat-select placeholder="Taux" formControlName="rateIntervalContributionSecond">
                                             <mat-option value="50">50%</mat-option>
                                             <mat-option value="100">100%</mat-option>
                                             <mat-option value="150">150%</mat-option>
@@ -461,7 +489,8 @@
                                 </div>
                                 <div class="w-1/4">
                                     <mat-form-field class="w-1/2">
-                                        <input matInput placeholder="Plafond" type="number">
+                                        <input matInput placeholder="Plafond" type="number"
+                                            formControlName="ceilingIntervalContributionSecond">
                                     </mat-form-field>
 
                                 </div>
@@ -473,12 +502,13 @@
                                         <input matInput placeholder="De" type="number">€
                                     </mat-form-field>
                                     <mat-form-field class="w-1/2">
-                                        <input matInput placeholder="A" type="number">€
+                                        <input matInput placeholder="A" type="number"
+                                            formControlName="intervalContributionSecond">€
                                     </mat-form-field>
                                 </div>
                                 <div class="w-1/4">
                                     <mat-form-field class="w-2/3">
-                                        <mat-select placeholder="Taux">
+                                        <mat-select placeholder="Taux" formControlName="rateIntervalContributionThird">
                                             <mat-option value="50">50%</mat-option>
                                             <mat-option value="100">100%</mat-option>
                                             <mat-option value="150">150%</mat-option>
@@ -491,7 +521,8 @@
                                 </div>
                                 <div class="w-1/4">
                                     <mat-form-field class="w-1/2">
-                                        <input matInput placeholder="Plafond" type="number">
+                                        <input matInput placeholder="Plafond" type="number"
+                                            formControlName="ceilingIntervalContributionThird">
                                     </mat-form-field>
 
                                 </div>
@@ -503,7 +534,8 @@
                                         <input matInput placeholder="De" type="number">€
                                     </mat-form-field>
                                     <mat-form-field class="w-1/2">
-                                        <input matInput placeholder="A" type="number">€
+                                        <input matInput placeholder="A" type="number"
+                                            formControlName="intervalContributionThird">€
                                     </mat-form-field>
                                 </div>
                                 <div class="w-1/4">
@@ -563,12 +595,12 @@
 
                     </div>
                     <!-- end of PERCO plan -->
-
-                    <div>
-                        <button mat-raised-button color="primary mr-5" matStepperPrevious>précédent</button>
-                        <button mat-raised-button color="primary">Valider</button>
-                    </div>
                 </form>
+
+                <div>
+                    <button mat-raised-button color="primary mr-5" matStepperPrevious>précédent</button>
+                    <button mat-raised-button color="primary" (click)="onSubmit()">Valider</button>
+                </div>
             </mat-step>
         </mat-stepper>
 

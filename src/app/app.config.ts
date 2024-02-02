@@ -12,6 +12,7 @@ import { provideIcons } from 'app/core/icons/icons.provider';
 import { mockApiServices } from 'app/mock-api';
 import { TranslocoHttpLoader } from './core/transloco/transloco.http-loader';
 import { OAuthModule } from "angular-oauth2-oidc";
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 
 export const appConfig: ApplicationConfig = {
 
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
         provideAnimations(),
         provideHttpClient(),
         importProvidersFrom(OAuthModule.forRoot()),
+        importProvidersFrom(MatSelectCountryModule.forRoot('fr')),
         provideRouter(appRoutes,
             withPreloading(PreloadAllModules),
             withInMemoryScrolling({scrollPositionRestoration: 'enabled'}),

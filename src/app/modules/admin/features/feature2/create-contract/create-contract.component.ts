@@ -6,74 +6,91 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EmailValidator, FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { countries } from 'app/core/countries/Countries';
-import { Observable, map, startWith } from 'rxjs';
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
+import { ContractService } from 'app/core/_contract/contract.service';
+
 
 @Component({
   selector: 'app-craete-contract',
   standalone: true,
   imports: [
     CommonModule, MatFormFieldModule,MatInputModule,MatDatepickerModule,MatSelectModule,MatRadioModule, MatCheckboxModule,
-    MatStepperModule, MatButtonModule,FormsModule, ReactiveFormsModule, MatDividerModule
+    MatStepperModule, MatButtonModule,FormsModule, ReactiveFormsModule, MatDividerModule, MatSelectCountryModule
     ],
   templateUrl: './create-contract.component.html',
 })
 export class CreateContractComponent {
 
-  constructor(private formBuilder:FormBuilder){}
+  constructor(private formBuilder:FormBuilder, private contractService:ContractService){}
 
   selectedAbondementTypePEE:string = ''
   selectedAbondementTypePERCO:string = ''
 
   peeChecked:boolean = false
   percoChecked:boolean = false
-  countries = countries
+
+
+
 
   companyForm = this.formBuilder.group({
-    firstCtrl: ['', Validators.required],
     siren: ['', Validators.required],
 		companyName: ['', Validators.required],
 		legalForm: ['', Validators.required],
-		siret: ['', Validators.required],
+		siret: ['', Validators.required, Validators.maxLength(13),Validators.minLength(13)],
 		businessActivity: ['', Validators.required],
 		businessAddress: ['', Validators.required],
 		workforce: ['', Validators.required],
-		totalWage: ['', Validators.required]
+		totalWage: ['', Validators.required],
+		closingMonth: ['', Validators.required],
+
   });
 
   companySignatoryForm = this.formBuilder.group({
     lastName: ['', Validators.required],
     firstName: ['', Validators.required],
-		email: ['', Validators.required],
+		email: ['', Validators.required,EmailValidator],
+		phone: ['', Validators.required],
 		dateOfBirth: ['', Validators.required],
 		jobTitle: ['', Validators.required],
 		socialSecurityNumber: ['', Validators.required],
-		countryOfBirth: ['', Validators.required],
-		countryOfResidence: ['', Validators.required],
-		executive: ['', Validators.required]
+		countryOfBirth: ['', Validators.required,Validators],
+		countryOfResidence: [''],
+		executive: [false, Validators.required],
+		eligibility: ['', Validators.required],
   });
 
   peeContributionForm = this.formBuilder.group({
     rateSimpleContribution: ['', Validators.required],
     ceilingSimpleContribution: ['', Validators.required],
-		rateSeniorityContribution: ['', Validators.required],
-		ceilingSeniorityContributionLessYear: ['', Validators.required],
-		ceilingSeniorityContributionBetween1And3: ['', Validators.required],
-		ceilingSeniorityContributionBetween3And5: ['', Validators.required],
-		ceilingSeniorityContributionGreater5: ['', Validators.required],
+		rateSeniorityContribution: ['', Validators.required],//
+
+		ceilingSeniorityContributionLessYear: ['', Validators.required],//
+		ceilingSeniorityContributionBetween1And3: ['', Validators.required],//
+		ceilingSeniorityContributionBetween3And5: ['', Validators.required],//
+		ceilingSeniorityContributionGreater5: ['', Validators.required],//
+
 		ceilingIntervalContributionFirst: ['', Validators.required],
 		rateIntervalContributionFirst: ['', Validators.required],
+
+		//intervalContributionFirstFrom: ['', Validators.required],
 		intervalContributionFirst: ['', Validators.required],
+
 		ceilingIntervalContributionSecond: ['', Validators.required],
 		rateIntervalContributionSecond: ['', Validators.required],
+
+		//intervalContributionSecondFrom: ['', Validators.required],
 		intervalContributionSecond: ['', Validators.required],
+
 		ceilingIntervalContributionThird: ['', Validators.required],
 		rateIntervalContributionThird: ['', Validators.required],
+
+		//intervalContributionThirdFrom: ['', Validators.required],
 		intervalContributionThird: ['', Validators.required],
+
 		peeInterestAccepted: ['', Validators.required],
 		peeVoluntaryDepositAccepted: ['', Validators.required],
 		peeProfitSharingAccepted: ['', Validators.required],
@@ -90,13 +107,22 @@ export class CreateContractComponent {
 		ceilingSeniorityContributionGreater5: ['', Validators.required],
 		ceilingIntervalContributionFirst: ['', Validators.required],
 		rateIntervalContributionFirst: ['', Validators.required],
+
+		//intervalContributionFirstFrom: ['', Validators.required],
 		intervalContributionFirst: ['', Validators.required],
+
 		ceilingIntervalContributionSecond: ['', Validators.required],
 		rateIntervalContributionSecond: ['', Validators.required],
+
+		//intervalContributionSecondFrom: ['', Validators.required],
 		intervalContributionSecond: ['', Validators.required],
+
 		ceilingIntervalContributionThird: ['', Validators.required],
 		rateIntervalContributionThird: ['', Validators.required],
+
+		//intervalContributionThirdFrom: ['', Validators.required],
 		intervalContributionThird: ['', Validators.required],
+
 		percoInterestAccepted: ['', Validators.required],
 		percoVoluntaryDepositAccepted: ['', Validators.required],
 		percoProfitSharingAccepted: ['', Validators.required],
@@ -111,24 +137,36 @@ export class CreateContractComponent {
     this.selectedAbondementTypePERCO =  event.value
   }
 
+  onPeeCheckedChange(event):void{
+    this.peeChecked =event.checked
+  }
+  onPercoCheckedChange(event):void{
+    this.percoChecked =event.checked
+  }
 
-  // filtredCountries: Observable<string[]>;
-
-  // countryOfBirth = new FormControl('');
-  // ngOnInit() {
-  //   this.filtredCountries = this.countryOfBirth.valueChanges.pipe(
-  //     startWith(''),
-  //     map(value => this._filter(value || '')),
-  //   );
-  // }
-
-  // private _filter(value: string): string[] {
-  //   const filterValue = value.toLowerCase();
-
-  //   return this.options.filter(option => option.toLowerCase().includes(filterValue));
-  // }
+  noPlanSelected(){
+    return !(this.peeChecked || this.percoChecked)
+  }
 
 
 
+  onSubmit(){
+    const newContract = {
+        closingMonth: this.companyForm.value['closingMonth'], 
+        eligibility: this.companySignatoryForm.value['eligibility'],
+        company: this.companyForm.value,
+        companySignatory: this.companySignatoryForm.value,
+        peeContribution: this.peeContributionForm.value,
+        perecoContribution: this.percoContributionForm.value
+    }
+    console.log('submiiiiiiiiiiteeeed')
+    console.warn(" company form ",this.companyForm.value)
+    console.warn(" company admin personne ",this.companySignatoryForm.value)
+    console.warn(" pee form ",this.percoContributionForm.value)
+    console.warn(" perco form ",this.percoContributionForm.value)
+
+    this.contractService.postContract(newContract).subscribe(data=>console.log(data))
+
+  }
 
 }
