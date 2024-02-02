@@ -1,0 +1,355 @@
+<style>
+    .td-pading {
+        padding-left: 10px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+
+    }
+
+    .td-double-pading {
+        padding-left: 20px;
+        padding-bottom: 5px;
+
+    }
+</style>
+
+<div class="container w-full  px-2 py-18 left-30">
+    <mat-accordion>
+        <ul>
+            <li *ngIf="contractsPlan.peeContribution!==null"  class="mb-8">
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+
+                            <p>Mon Plan d'épargne Entreprise PEE</p>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-card-subtitle class="text-black">Paramétres</mat-card-subtitle>
+                    <table class="table-auto">
+                        <tbody>
+                        <tr>
+                            <td class="td-pading">type:</td>
+                            <div *ngIf="contractsPlan.peeContribution.rateSeniorityContribution !==null">
+                                <td class="text-black td-pading"> Par ancienneté</td>
+                            </div>
+
+                            <div *ngIf="contractsPlan.peeContribution.rateSimpleContribution !==null">
+                                <td class="text-black td-pading"> Simple</td>
+                            </div>
+                            <div *ngIf="contractsPlan.peeContribution.rateIntervalContributionFirst !==null">
+                                <td class="text-black td-pading"> Par paliers</td>
+                            </div>
+
+
+                        </tr>
+
+                        <tr *ngIf="contractsPlan.peeContribution.rateSeniorityContribution !==null">
+                            <td class="td-pading">Taux:</td>
+                            <td class="text-black td-pading">{{ contractsPlan.peeContribution.rateSeniorityContribution }} %</td>
+                        </tr>
+                        <tr>
+                            <td class="td-pading">Plafond:</td>
+                        </tr>
+
+                        <!-- Seniority CONTRIBUTION -->
+
+                        <div *ngIf="contractsPlan.peeContribution.rateSeniorityContribution !==null">
+
+                            <tr>
+                                <td class="td-double-pading">< 1 an:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.peeContribution.ceilingSeniorityContributionLessYear }} €</td>
+                            </tr>
+
+                            <tr>
+                                <td class="td-double-pading">de 1 an à 3 ans:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.peeContribution.ceilingSeniorityContributionBetween1And3 }} €
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="td-double-pading">de 3 ans à 5 ans:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.peeContribution.ceilingSeniorityContributionBetween3And5 }} €
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="td-double-pading">Aprés 5 ans:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.peeContribution.ceilingSeniorityContributionGreater5 }} €</td>
+                            </tr>
+
+
+
+
+                        </div>
+
+                        <!-- SIMPLE CONTRIBUTION -->
+                        <div *ngIf="contractsPlan.peeContribution.rateSimpleContribution !==null">
+                            <tr>
+
+                                <td class="text-black td-pading">{{ contractsPlan.peeContribution.ceilingSimpleContribution }} €</td>
+                                <td class="td-double-pading ">Taux:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.peeContribution.rateSimpleContribution }} %</td>
+                            </tr>
+
+
+
+
+
+
+                        </div>
+
+
+                        <!-- Levels CONTRIBUTION -->
+                        <div *ngIf="contractsPlan.peeContribution.rateIntervalContributionFirst !==null">
+
+                            <!-- Levels 1 -->
+
+                            <tr>
+                                <td class="td-double-pading">De</td>
+                                <td class=" td-pading">{{ contractsPlan.peeContribution.intervalContributionFirst }} €</td>
+                                <td class="td-double-pading">à</td>
+                                <td class="td-pading">{{ contractsPlan.peeContribution.intervalContributionSecond }} €:</td>
+
+                                <td class="text-black td-double-pading">{{ contractsPlan.peeContribution.ceilingIntervalContributionFirst }} €
+                                </td>
+                                <td class=" td-pading">Taux:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.peeContribution.rateIntervalContributionFirst }} %</td>
+
+                            </tr>
+                            <!-- Levels 2 -->
+                            <tr>
+                                <td class="td-double-pading">De</td>
+                                <td class=" td-pading">{{ contractsPlan.peeContribution.intervalContributionSecond }} €</td>
+                                <td class="td-double-pading">à</td>
+                                <td class=" td-pading">{{ contractsPlan.peeContribution.intervalContributionThird }} €:</td>
+
+                                <td class="text-black td-double-pading">{{ contractsPlan.peeContribution.ceilingIntervalContributionSecond }} €
+                                </td>
+
+                                <td class=" td-pading">Taux:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.peeContribution.rateIntervalContributionSecond }} %</td>
+                            </tr>
+
+
+                            <!-- Levels 3 -->
+                            <tr>
+
+                                <td class="td-double-pading">De</td>
+                                <td class=" td-pading">{{ contractsPlan.peeContribution.intervalContributionThird }} €</td>
+                                <td class="td-double-pading">à</td>
+                                <td class=" td-pading">{{ contractsPlan.peeContribution.intervalContributionThird + contractsPlan.peeContribution.intervalContributionThird }}
+                                    €:
+                                </td>
+
+
+                                <td class="text-black td-double-pading">{{ contractsPlan.peeContribution.ceilingIntervalContributionThird }} €
+                                </td>
+
+                                <td class=" td-pading">Taux:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.peeContribution.rateIntervalContributionThird }} %</td>
+
+                            </tr>
+
+                        </div>
+
+                        <tr>
+                            <td class="text-black ">Versements:</td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="td-pading">Versement volontaire:</td>
+                            <td class="td-pading">{{ contractsPlan.peeContribution.peeVoluntaryDepositAccepted ? 'Oui' : 'Non' }}</td>
+                        </tr>
+
+                        <tr>
+                            <td class="td-pading">Participation:</td>
+                            <td class="td-pading">{{ contractsPlan.peeContribution.peeProfitSharingAccepted ? 'Oui' : 'Non' }}</td>
+                        </tr>
+
+                        <tr>
+                            <td class="td-pading">Interessement:</td>
+                            <td class="td-pading">{{ contractsPlan.peeContribution.peeInterestAccepted ? 'Oui' : 'Non' }}</td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+
+                </mat-expansion-panel>
+            </li>
+
+
+            <li *ngIf="contractsPlan.perecoContribution!==null" class="mb-8">
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+
+                            <p>Mon Plan d'épargne Retraite Collaboratif PERECO</p>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-card-subtitle class="text-black">Paramétres</mat-card-subtitle>
+                    <table class="table-auto">
+                        <tbody>
+                        <tr>
+                            <td class="td-pading">type:</td>
+                            <div *ngIf="contractsPlan.perecoContribution.rateSeniorityContribution !==null">
+                                <td class="text-black td-pading"> Par ancienneté</td>
+                            </div>
+
+                            <div *ngIf="contractsPlan.perecoContribution.rateSimpleContribution !==null">
+                                <td class="text-black td-pading"> Simple</td>
+                            </div>
+                            <div *ngIf="contractsPlan.perecoContribution.rateIntervalContributionFirst !==null">
+                                <td class="text-black td-pading"> Par paliers</td>
+                            </div>
+
+
+                        </tr>
+
+                        <tr *ngIf="contractsPlan.perecoContribution.rateSeniorityContribution !==null">
+                            <td class="td-pading">Taux:</td>
+                            <td class="text-black td-pading">{{ contractsPlan.perecoContribution.rateSeniorityContribution }} %</td>
+                        </tr>
+                        <tr>
+                            <td class="td-pading">Plafond:</td>
+                        </tr>
+
+                        <!-- Seniority CONTRIBUTION -->
+
+                        <div *ngIf="contractsPlan.perecoContribution.rateSeniorityContribution !==null">
+
+                            <tr>
+                                <td class="td-double-pading">< 1 an:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.perecoContribution.ceilingSeniorityContributionLessYear }} €</td>
+                            </tr>
+
+                            <tr>
+                                <td class="td-double-pading">de 1 an à 3 ans:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.perecoContribution.ceilingSeniorityContributionBetween1And3 }} €
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="td-double-pading">de 3 ans à 5 ans:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.perecoContribution.ceilingSeniorityContributionBetween3And5 }} €
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="td-double-pading">Aprés 5 ans:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.perecoContribution.ceilingSeniorityContributionGreater5 }} €</td>
+                            </tr>
+
+
+
+
+                        </div>
+
+                        <!-- SIMPLE CONTRIBUTION -->
+                        <div *ngIf="contractsPlan.perecoContribution.rateSimpleContribution !==null">
+                            <tr>
+
+                                <td class="text-black td-pading">{{ contractsPlan.perecoContribution.ceilingSimpleContribution }} €</td>
+                                <td class="td-double-pading ">Taux:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.perecoContribution.rateSimpleContribution }} %</td>
+                            </tr>
+
+
+
+
+
+
+                        </div>
+
+
+                        <!-- Levels CONTRIBUTION -->
+                        <div *ngIf="contractsPlan.perecoContribution.rateIntervalContributionFirst !==null">
+
+                            <!-- Levels 1 -->
+
+                            <tr>
+                                <td class="td-double-pading">De</td>
+                                <td class=" td-pading">{{ contractsPlan.perecoContribution.intervalContributionFirst }} €</td>
+                                <td class="td-double-pading">à</td>
+                                <td class="td-pading">{{ contractsPlan.perecoContribution.intervalContributionSecond }} €:</td>
+
+                                <td class="text-black td-double-pading">{{ contractsPlan.perecoContribution.ceilingIntervalContributionFirst }} €
+                                </td>
+                                <td class=" td-pading">Taux:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.perecoContribution.rateIntervalContributionFirst }} %</td>
+
+                            </tr>
+                            <!-- Levels 2 -->
+                            <tr>
+                                <td class="td-double-pading">De</td>
+                                <td class=" td-pading">{{ contractsPlan.perecoContribution.intervalContributionSecond }} €</td>
+                                <td class="td-double-pading">à</td>
+                                <td class=" td-pading">{{ contractsPlan.perecoContribution.intervalContributionThird }} €:</td>
+
+                                <td class="text-black td-double-pading">{{ contractsPlan.perecoContribution.ceilingIntervalContributionSecond }} €
+                                </td>
+
+                                <td class=" td-pading">Taux:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.perecoContribution.rateIntervalContributionSecond }} %</td>
+                            </tr>
+
+
+                            <!-- Levels 3 -->
+                            <tr>
+
+                                <td class="td-double-pading">De</td>
+                                <td class=" td-pading">{{ contractsPlan.perecoContribution.intervalContributionThird }} €</td>
+                                <td class="td-double-pading">à</td>
+                                <td class=" td-pading">{{ contractsPlan.perecoContribution.intervalContributionThird + contractsPlan.peeContribution.intervalContributionThird }}
+                                    €:
+                                </td>
+
+
+                                <td class="text-black td-double-pading">{{ contractsPlan.perecoContribution.ceilingIntervalContributionThird }} €
+                                </td>
+
+                                <td class=" td-pading">Taux:</td>
+                                <td class="text-black td-pading">{{ contractsPlan.perecoContribution.rateIntervalContributionThird }} %</td>
+
+                            </tr>
+
+                        </div>
+
+                        <tr>
+                            <td class="text-black ">Versements:</td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="td-pading">Versement volontaire:</td>
+                            <td class="td-pading">{{ contractsPlan.perecoContribution.perecoVoluntaryDepositAccepted ? 'Oui' : 'Non' }}</td>
+                        </tr>
+
+                        <tr>
+                            <td class="td-pading">Participation:</td>
+                            <td class="td-pading">{{ contractsPlan.perecoContribution.perecoProfitSharingAccepted ? 'Oui' : 'Non' }}</td>
+                        </tr>
+
+                        <tr>
+                            <td class="td-pading">Interessement:</td>
+                            <td class="td-pading">{{ contractsPlan.perecoContribution.perecoInterestAccepted ? 'Oui' : 'Non' }}</td>
+                        </tr>
+
+                        <tr *ngIf="contractsPlan.perecoContribution.perecoTimeSavingAccountAccepted !== null">
+                            <td class="td-pading">Compte épargne temps:</td>
+                            <td class="td-pading">{{ contractsPlan.perecoContribution.perecoTimeSavingAccountAccepted ? 'Oui' : 'Non' }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </mat-expansion-panel>
+            </li>
+
+        </ul>
+
+
+    </mat-accordion>
+
+
+</div>

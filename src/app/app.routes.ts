@@ -22,7 +22,7 @@ export const appRoutes: Route[] = [
             // Dashboards
             {path: 'features', children: [
                 {path: 'feature1', loadChildren: () => import('app/modules/admin/features/feature1/feature1.routes')},
-                {path: 'feature2', loadChildren: () => import('app/modules/admin/features/feature2/feature2.routes')},
+                {path: 'contract', loadChildren: () => import('@/modules/admin/features/contract/container/contract.routes')},
                 {path: 'feature3', loadChildren: () => import('app/modules/admin/features/feature3/feature3.routes')},
                 {path: 'feature4', loadChildren: () => import('app/modules/admin/features/feature4/feature4.routes')},
             ]},

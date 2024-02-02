@@ -4,18 +4,18 @@ import { Router } from '@angular/router';
 
 @Component({
     selector       : 'feature2',
-    templateUrl    : './feature2.component.html',
+    templateUrl    : './contract.component.html',
     encapsulation  : ViewEncapsulation.None,
     standalone     : true,
     imports        : [MatButtonModule],
 })
-export class Feature2Component
+export class ContractComponent
 {
     constructor(private router: Router) {}
 
 
     consultContract():void{
-        this.router.navigate(['/features/feature2/consultContractScreen']);
+        this.router.navigate(['/features/contract/consult-contract.ts']);
     }
-    
+
 }

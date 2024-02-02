@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AppInformation} from "./app-information";
+import {AppInformation} from "../model/app-information";
 
 @Injectable({providedIn: 'root'})
 export class AppInformationService {
