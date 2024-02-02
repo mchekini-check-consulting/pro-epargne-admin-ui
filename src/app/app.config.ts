@@ -1,4 +1,4 @@
-import { provideHttpClient } from '@angular/common/http';
+import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom, inject } from '@angular/core';
 import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
@@ -12,12 +12,13 @@ import { provideIcons } from 'app/core/icons/icons.provider';
 import { mockApiServices } from 'app/mock-api';
 import { TranslocoHttpLoader } from './core/transloco/transloco.http-loader';
 import { OAuthModule } from "angular-oauth2-oidc";
+import {HttpRequestInterceptor} from "@/core/interceptor/HttpRequestInterceptor";
 
 export const appConfig: ApplicationConfig = {
 
     providers: [
         provideAnimations(),
-        provideHttpClient(),
+        provideHttpClient(withInterceptors([HttpRequestInterceptor])),
         importProvidersFrom(OAuthModule.forRoot()),
         provideRouter(appRoutes,
             withPreloading(PreloadAllModules),
