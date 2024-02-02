@@ -28,11 +28,13 @@ export class ConsultContractComponent implements OnInit{
     getContractPlan(id:number): void {
         this.contractService.getContractPlans(id)
             .subscribe(
-                (contracts: Contract) => {
-                    this.contractsPlan = contracts["data"];
+                (contract: Contract) => {
+                    this.contractsPlan = contract;
 
                 },
-                (error) => {}
+                (error) => {
+
+                }
             );
     }
 

@@ -1,0 +1,71 @@
+<div class="container py-5 pl-8 pr-12 w-full">
+    <header>
+        <h3 class="font-bold text-3xl" >Liste Des Collaborateurs</h3>
+    </header>
+
+    <div>
+        <div class="flex justify-end mb-2 px-3">
+            <button mat-mini-fab color="primary" (click)="createCollaborator()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef>Nom</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.lastName }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef>Prénom</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.firstName }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="gender">
+                <th mat-header-cell *matHeaderCellDef>Sexe</th>
+                <td mat-cell *matCellDef="let element">{{ element.gender }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="birthDate">
+                <th mat-header-cell *matHeaderCellDef>Date de naissance</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.birthDate }}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="entryDate">
+                <th mat-header-cell *matHeaderCellDef>Date d'entrée</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.entryDate }}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef>Email</th>
+                <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+            </ng-container>
+            <ng-container matColumnDef="grossSalary">
+                <th mat-header-cell *matHeaderCellDef>Salaire brut</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.grossSalary }}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                    <button
+                        color="primary"
+                        class="mr-4"
+                        (click)="updateCollaborator(element)"
+                    >
+                        <mat-icon>mode</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+    </div>
+</div>

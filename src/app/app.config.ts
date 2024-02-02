@@ -50,16 +50,16 @@ export const appConfig: ApplicationConfig = {
             config: {
                 availableLangs      : [
                     {
-                        id   : 'en',
-                        label: 'English',
-                    },
-                    {
                         id   : 'fr',
                         label: 'Français',
                     },
+                    {
+                        id   : 'en',
+                        label: 'English',
+                    },
                 ],
-                defaultLang         : 'en',
-                fallbackLang        : 'en',
+                defaultLang         : 'fr',
+                fallbackLang        : 'fr',
                 reRenderOnLangChange: true,
                 prodMode            : true,
             },
