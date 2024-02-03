@@ -444,7 +444,7 @@
                             <div class="flex">
                                 <div class="w-1/2">
                                     <mat-form-field class="w-2/3">
-                                        <mat-select placeholder="Taux" formControlName="rateIntervalContributionFirst">
+                                        <mat-select placeholder="Taux" formControlName="rateSimpleContribution">
                                             <mat-option value="50">50%</mat-option>
                                             <mat-option value="100">100%</mat-option>
                                             <mat-option value="150">150%</mat-option>
@@ -458,7 +458,7 @@
                                 <div class="w-1/2">
                                     <mat-form-field class="w-2/3">
                                         <input matInput placeholder="Plafond" type="number"
-                                            formControlName="ceilingIntervalContributionFirst">
+                                            formControlName="ceilingSimpleContribution">
                                     </mat-form-field>
 
                                 </div>
@@ -612,7 +612,8 @@
 
                 <div>
                     <button mat-raised-button color="primary mr-5" matStepperPrevious>précédent</button>
-                    <button mat-raised-button color="primary" (click)="onSubmit()">Valider</button>
+                    <button mat-raised-button color="primary" (click)="onSubmit()"
+                        [disabled]="!canSubmitForm()">Valider</button>
                 </div>
             </mat-step>
         </mat-stepper>

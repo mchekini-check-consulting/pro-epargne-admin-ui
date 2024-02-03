@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -51,8 +51,8 @@ export class CreateContractComponent {
 		siren: ['', Validators.required],
 		businessActivity: ['', Validators.required],
 		businessAddress: ['', Validators.required],
-		workforce: ['', Validators.required],
-		totalWages: ['', Validators.required],
+		workforce: ['', [Validators.required, Validators.min(1)]],
+		totalWages: ['', [Validators.required, Validators.min(1)]],
 		closingMonth: ['', Validators.required],
 
   });
@@ -120,9 +120,43 @@ export class CreateContractComponent {
 
   onAbondementPeeTypeChange(event):void{
     this.selectedAbondementTypePEE =  event.value
+    this.peeContributionForm.controls['rateSimpleContribution'].reset()
+    this.peeContributionForm.controls['ceilingSimpleContribution'].reset()
+    this.peeContributionForm.controls['rateSeniorityContribution'].reset()
+    this.peeContributionForm.controls['ceilingSeniorityContributionLessYear'].reset()
+    this.peeContributionForm.controls['ceilingSeniorityContributionBetween1And3'].reset()
+    this.peeContributionForm.controls['ceilingSeniorityContributionBetween3And5'].reset()
+    this.peeContributionForm.controls['ceilingSeniorityContributionGreater5'].reset()
+    this.peeContributionForm.controls['ceilingIntervalContributionFirst'].reset()
+    this.peeContributionForm.controls['rateIntervalContributionFirst'].reset()
+    this.peeContributionForm.controls['intervalContributionFirst'].reset()
+    this.peeContributionForm.controls['ceilingIntervalContributionSecond'].reset()
+    this.peeContributionForm.controls['rateIntervalContributionSecond'].reset()
+    this.peeContributionForm.controls['intervalContributionSecond'].reset()
+    this.peeContributionForm.controls['ceilingIntervalContributionThird'].reset()
+    this.peeContributionForm.controls['rateIntervalContributionThird'].reset()
+    this.peeContributionForm.controls['intervalContributionThird'].reset()
+    
+   
   }
   onAbondementPercoTypeChange(event):void{
     this.selectedAbondementTypePERCO =  event.value
+    this.perecoContributionForm.controls['rateSimpleContribution'].reset()
+    this.perecoContributionForm.controls['ceilingSimpleContribution'].reset()
+    this.perecoContributionForm.controls['rateSeniorityContribution'].reset()
+    this.perecoContributionForm.controls['ceilingSeniorityContributionLessYear'].reset()
+    this.perecoContributionForm.controls['ceilingSeniorityContributionBetween1And3'].reset()
+    this.perecoContributionForm.controls['ceilingSeniorityContributionBetween3And5'].reset()
+    this.perecoContributionForm.controls['ceilingSeniorityContributionGreater5'].reset()
+    this.perecoContributionForm.controls['ceilingIntervalContributionFirst'].reset()
+    this.perecoContributionForm.controls['rateIntervalContributionFirst'].reset()
+    this.perecoContributionForm.controls['intervalContributionFirst'].reset()
+    this.perecoContributionForm.controls['ceilingIntervalContributionSecond'].reset()
+    this.perecoContributionForm.controls['rateIntervalContributionSecond'].reset()
+    this.peeContributionForm.controls['intervalContributionSecond'].reset()
+    this.perecoContributionForm.controls['ceilingIntervalContributionThird'].reset()
+    this.perecoContributionForm.controls['rateIntervalContributionThird'].reset()
+    this.perecoContributionForm.controls['intervalContributionThird'].reset()
   }
 
   onPeeCheckedChange(event):void{
@@ -136,9 +170,41 @@ export class CreateContractComponent {
     return !(this.peeChecked || this.percoChecked)
   }
 
+  canSubmitForm():boolean{
+
+    if(this.companyForm.invalid) return false
+    if(this.companySignatoryForm.invalid) return false
+
+    let peeInterestChecked = this.peeContributionForm.get("peeInterestAccepted").value?true:false
+    let peeVoluntaryChecked = this.peeContributionForm.get("peeVoluntaryDepositAccepted").value?true:false
+    let peeProfitChecked = this.peeContributionForm.get("peeProfitSharingAccepted").value?true:false
+    let atLeastOnePeeAbondementIsChecked = peeInterestChecked || peeVoluntaryChecked || peeProfitChecked
+
+    let perecoInterestChecked = this.perecoContributionForm.get("perecoInterestAccepted").value?true:false
+    let perecoVoluntaryChecked = this.perecoContributionForm.get("perecoVoluntaryDepositAccepted").value?true:false
+    let perecoProfitChecked = this.perecoContributionForm.get("perecoProfitSharingAccepted").value?true:false
+    let perecoTimeSavingChecked = this.perecoContributionForm.get("perecoTimeSavingAccountAccepted").value?true:false
+    let atLeastOnePerecoAbondementIsChecked = perecoInterestChecked || perecoVoluntaryChecked || perecoProfitChecked || perecoTimeSavingChecked
+    let planForPeeChosen = this.selectedAbondementTypePEE?true:false
+    let planForPerecoChosen = this.selectedAbondementTypePERCO?true:false
+  
+
+    if( this.peeChecked && this.percoChecked) {
+      return atLeastOnePeeAbondementIsChecked && atLeastOnePerecoAbondementIsChecked && planForPeeChosen && planForPerecoChosen
+    }
+    else if (this.peeChecked) {
+      return atLeastOnePeeAbondementIsChecked && planForPeeChosen
+    }
+    else if (this.percoChecked) {
+      return atLeastOnePerecoAbondementIsChecked && planForPerecoChosen
+    }
+    else return false
+  }
+
 
 
   onSubmit(){
+
     const newContract = {
         closingMonth: this.companyForm.value['closingMonth'], 
         eligibility: this.companySignatoryForm.value['eligibility'],
@@ -146,13 +212,12 @@ export class CreateContractComponent {
         companySignatory: {...this.companySignatoryForm.value,
           countryOfBirth:this.companySignatoryForm.value.countryOfBirth?.alpha2Code,
           countryOfResidence:this.companySignatoryForm.value.countryOfResidence?.alpha2Code,
-          dateOfBirth: this.formatDate(this.companySignatoryForm.value.dateOfBirth)
+          dateOfBirth: formatDate(this.companySignatoryForm.value.dateOfBirth,"yyyy-MM-dd","en-US")
           
         },
         peeContribution: this.peeContributionForm.value,
         perecoContribution: this.perecoContributionForm.value
     }
-
 
     
     this.contractService.createContract(newContract).subscribe(
@@ -178,12 +243,6 @@ export class CreateContractComponent {
     )
 
   }
-
-  formatDate(date) {
-    var d = new Date(date)
-    return d.toISOString()!.split('T')[0]
-
-}
 
 }
 
