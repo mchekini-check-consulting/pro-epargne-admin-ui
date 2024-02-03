@@ -6,12 +6,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { EmailValidator, FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 import { ContractService } from 'app/core/_contract/contract.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SuccessComponent } from 'app/layout/common/dialog/success/success.component';
 
 
 @Component({
@@ -19,13 +21,14 @@ import { ContractService } from 'app/core/_contract/contract.service';
   standalone: true,
   imports: [
     CommonModule, MatFormFieldModule,MatInputModule,MatDatepickerModule,MatSelectModule,MatRadioModule, MatCheckboxModule,
-    MatStepperModule, MatButtonModule,FormsModule, ReactiveFormsModule, MatDividerModule, MatSelectCountryModule
+    MatStepperModule, MatButtonModule,FormsModule, ReactiveFormsModule, MatDividerModule, MatSelectCountryModule,
+   
     ],
   templateUrl: './create-contract.component.html',
 })
 export class CreateContractComponent {
 
-  constructor(private formBuilder:FormBuilder, private contractService:ContractService){}
+  constructor(private formBuilder:FormBuilder, private contractService:ContractService,public dialog:MatDialog){}
 
   selectedAbondementTypePEE:string = ''
   selectedAbondementTypePERCO:string = ''
@@ -37,14 +40,14 @@ export class CreateContractComponent {
 
 
   companyForm = this.formBuilder.group({
-    siren: ['', Validators.required],
 		companyName: ['', Validators.required],
 		legalForm: ['', Validators.required],
-		siret: ['', Validators.required, Validators.maxLength(13),Validators.minLength(13)],
+		siret: ['', [Validators.required, Validators.maxLength(13), Validators.minLength(13)]],
+		siren: ['', Validators.required],
 		businessActivity: ['', Validators.required],
 		businessAddress: ['', Validators.required],
 		workforce: ['', Validators.required],
-		totalWage: ['', Validators.required],
+		totalWages: ['', Validators.required],
 		closingMonth: ['', Validators.required],
 
   });
@@ -52,13 +55,13 @@ export class CreateContractComponent {
   companySignatoryForm = this.formBuilder.group({
     lastName: ['', Validators.required],
     firstName: ['', Validators.required],
-		email: ['', Validators.required,EmailValidator],
+		email: ['', Validators.required],
 		phone: ['', Validators.required],
-		dateOfBirth: ['', Validators.required],
+		dateOfBirth: ["", Validators.required],
 		jobTitle: ['', Validators.required],
 		socialSecurityNumber: ['', Validators.required],
-		countryOfBirth: ['', Validators.required,Validators],
-		countryOfResidence: [''],
+		countryOfBirth: [{name: "",alpha2Code: "",alpha3Code: "",numericCode: "",callingCode: ""}, Validators.required],
+		countryOfResidence: [{name: "",alpha2Code: "",alpha3Code: "",numericCode: "",callingCode: ""}],
 		executive: [false, Validators.required],
 		eligibility: ['', Validators.required],
   });
@@ -155,18 +158,40 @@ export class CreateContractComponent {
         closingMonth: this.companyForm.value['closingMonth'], 
         eligibility: this.companySignatoryForm.value['eligibility'],
         company: this.companyForm.value,
-        companySignatory: this.companySignatoryForm.value,
+        companySignatory: {...this.companySignatoryForm.value,
+          countryOfBirth:this.companySignatoryForm.value.countryOfBirth?.alpha2Code,
+          countryOfResidence:this.companySignatoryForm.value.countryOfResidence?.alpha2Code,
+          //dateOfBirth: this.companySignatoryForm.value.dateOfBirth.toISOString()!.split('T')[0]
+          dateOfBirth: this.formatDate(this.companySignatoryForm.value.dateOfBirth)
+          
+        },
         peeContribution: this.peeContributionForm.value,
-        perecoContribution: this.percoContributionForm.value
+        percoContribution: this.percoContributionForm.value
     }
-    console.log('submiiiiiiiiiiteeeed')
-    console.warn(" company form ",this.companyForm.value)
-    console.warn(" company admin personne ",this.companySignatoryForm.value)
-    console.warn(" pee form ",this.percoContributionForm.value)
-    console.warn(" perco form ",this.percoContributionForm.value)
-
-    this.contractService.postContract(newContract).subscribe(data=>console.log(data))
+    
+    
+    this.contractService.postContract(newContract).subscribe(
+        data=>{
+          console.log(data)
+          this.dialog.open(SuccessComponent, {
+            data: {
+              title: 'Contrat créé avec succès',
+              body:'Votre contrat a été créé avec succès et vos choix ont bien été enregistrés'
+            },
+          })
+      },
+      error=>{
+        console.log(error)
+        
+      }
+    )
 
   }
+
+  formatDate(date) {
+    var d = new Date(date)
+    return d.toISOString()!.split('T')[0]
+
+}
 
 }

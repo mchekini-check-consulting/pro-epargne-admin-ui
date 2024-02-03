@@ -3,7 +3,7 @@
 
     <div class="bg-zinc-300 w-3/5 mt-5 rounded-3xl pt-5">
         <h1 class="text-2xl text-center">Création du contrat</h1>
-        <mat-stepper class="bg-zinc-100 m-5 p-5 rounded-3xl" #stepper>
+        <mat-stepper class="bg-zinc-100 m-5 p-5 rounded-3xl" #stepper linear="false">
             <mat-step [stepControl]="companyForm">
                 <form [formGroup]="companyForm">
                     <ng-template matStepLabel>Information sur l'entreprise</ng-template>
@@ -14,12 +14,24 @@
                     </div>
                     <div class="mt-2">
                         <mat-form-field class="w-2/3">
-                            <input matInput placeholder="Forme juridique" type="text" formControlName="legalForm">
+                            <mat-select placeholder="Forme juridique" formControlName="legalForm">
+                                <mat-option value="SASU">SASU</mat-option>
+                                <mat-option value="SAS">SAS</mat-option>
+                                <mat-option value="EURL">EURL</mat-option>
+                                <mat-option value="SARL">SARL</mat-option>
+                                <mat-option value="SCI">SCI</mat-option>
+                                <mat-option value="SNC">SNC</mat-option>
+                            </mat-select>
                         </mat-form-field>
                     </div>
                     <div class="mt-2">
                         <mat-form-field class="w-2/3">
                             <input matInput placeholder="SIRET" type="number" formControlName="siret">
+                        </mat-form-field>
+                    </div>
+                    <div class="mt-2">
+                        <mat-form-field class="w-2/3">
+                            <input matInput placeholder="SIREN" type="number" formControlName="siren">
                         </mat-form-field>
                     </div>
                     <div class="mt-2">
@@ -63,7 +75,7 @@
                     </div>
                     <div class="mt-2">
                         <mat-form-field class="w-2/3">
-                            <input matInput placeholder="Masse salariale" type="number" formControlName="totalWage">
+                            <input matInput placeholder="Masse salariale" type="number" formControlName="totalWages">
                         </mat-form-field>
                     </div>
 
@@ -133,7 +145,7 @@
                     <div class="flex">
                         <div class="w-1/2">
                             <mat-select-country label="Pays de naissance" placeHolder="Pays de naissance"
-                                formControlName="countryOfBirth" itemsLoadSize="4">
+                                formControlName="countryOfBirth" itemsLoadSize="4" value="">
                             </mat-select-country>
                         </div>
                         <div class="w-1/2">
@@ -227,12 +239,12 @@
                                 <div class="w-1/2">
                                     <mat-form-field class="w-2/3">
                                         <mat-select placeholder="Taux" formControlName="rateSimpleContribution">
-                                            <mat-option value="sm">50%</mat-option>
-                                            <mat-option value="pl">100%</mat-option>
-                                            <mat-option value="an">150%</mat-option>
-                                            <mat-option value="an">200%</mat-option>
-                                            <mat-option value="an">250%</mat-option>
-                                            <mat-option value="an">300%</mat-option>
+                                            <mat-option value="50">50%</mat-option>
+                                            <mat-option value="100">100%</mat-option>
+                                            <mat-option value="150">150%</mat-option>
+                                            <mat-option value="200">200%</mat-option>
+                                            <mat-option value="250">250%</mat-option>
+                                            <mat-option value="300">300%</mat-option>
                                         </mat-select>
                                     </mat-form-field>
 
@@ -358,12 +370,12 @@
                             <div class="">
                                 <mat-form-field class="w-1/4">
                                     <mat-select placeholder="Taux" formControlName="rateSeniorityContribution">
-                                        <mat-option value="sm">50%</mat-option>
-                                        <mat-option value="pl">100%</mat-option>
-                                        <mat-option value="an">150%</mat-option>
-                                        <mat-option value="an">200%</mat-option>
-                                        <mat-option value="an">250%</mat-option>
-                                        <mat-option value="an">300%</mat-option>
+                                        <mat-option value="50">50%</mat-option>
+                                        <mat-option value="100">100%</mat-option>
+                                        <mat-option value="150">150%</mat-option>
+                                        <mat-option value="200">200%</mat-option>
+                                        <mat-option value="250">250%</mat-option>
+                                        <mat-option value="300">300%</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -436,12 +448,12 @@
                                 <div class="w-1/2">
                                     <mat-form-field class="w-2/3">
                                         <mat-select placeholder="Taux" formControlName="rateIntervalContributionFirst">
-                                            <mat-option value="sm">50%</mat-option>
-                                            <mat-option value="pl">100%</mat-option>
-                                            <mat-option value="an">150%</mat-option>
-                                            <mat-option value="an">200%</mat-option>
-                                            <mat-option value="an">250%</mat-option>
-                                            <mat-option value="an">300%</mat-option>
+                                            <mat-option value="50">50%</mat-option>
+                                            <mat-option value="100">100%</mat-option>
+                                            <mat-option value="150">150%</mat-option>
+                                            <mat-option value="200">200%</mat-option>
+                                            <mat-option value="250">250%</mat-option>
+                                            <mat-option value="300">300%</mat-option>
                                         </mat-select>
                                     </mat-form-field>
 
@@ -566,28 +578,32 @@
                             </div>
                             <div class="">
                                 <mat-form-field class="w-1/4">
-                                    <mat-select placeholder="Taux">
-                                        <mat-option value="sm">50%</mat-option>
-                                        <mat-option value="pl">100%</mat-option>
-                                        <mat-option value="an">150%</mat-option>
-                                        <mat-option value="an">200%</mat-option>
-                                        <mat-option value="an">250%</mat-option>
-                                        <mat-option value="an">300%</mat-option>
+                                    <mat-select placeholder="Taux" formControlName="rateSeniorityContribution">
+                                        <mat-option value="50">50%</mat-option>
+                                        <mat-option value="100">100%</mat-option>
+                                        <mat-option value="150">150%</mat-option>
+                                        <mat-option value="200">200%</mat-option>
+                                        <mat-option value="250">250%</mat-option>
+                                        <mat-option value="300">300%</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
                             <div class="flex">
                                 <mat-form-field class="w-1/4 pr-2">
-                                    <input matInput placeholder="< 1 an" type="number">
+                                    <input matInput placeholder="< 1 an" type="number"
+                                        formControlName="ceilingSeniorityContributionLessYear">
                                 </mat-form-field>
                                 <mat-form-field class="w-1/4 pr-2">
-                                    <input matInput placeholder="1 à 3 ans" type="number">
+                                    <input matInput placeholder="1 à 3 ans" type="number"
+                                        formControlName="ceilingSeniorityContributionBetween1And3">
                                 </mat-form-field>
                                 <mat-form-field class="w-1/4 pr-2">
-                                    <input matInput placeholder="3 à 5 ans" type="number">
+                                    <input matInput placeholder="3 à 5 ans" type="number"
+                                        formControlName="ceilingSeniorityContributionBetween3And5">
                                 </mat-form-field>
                                 <mat-form-field class="w-1/4 pr-2">
-                                    <input matInput placeholder="> 5 ans" type="number">
+                                    <input matInput placeholder="> 5 ans" type="number"
+                                        formControlName="ceilingSeniorityContributionGreater5">
                                 </mat-form-field>
 
                             </div>

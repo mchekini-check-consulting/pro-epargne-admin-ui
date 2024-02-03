@@ -60,7 +60,7 @@ export class contractMockApi
                 this._contract = assign({}, this._contract, contract);
 
                 // Return the response
-                return [200, cloneDeep(this._contract)];
+                return [200, cloneDeep(contract)];
             });
     }
 }

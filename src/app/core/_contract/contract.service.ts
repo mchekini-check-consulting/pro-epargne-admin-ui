@@ -10,6 +10,6 @@ export class ContractService {
 
   postContract(contract:Object){
     console.log(contract)
-    return this.httpClient.post("api/common/contract",contract)
+    return this.httpClient.post("api/v1/contract",contract)
   }
 }
