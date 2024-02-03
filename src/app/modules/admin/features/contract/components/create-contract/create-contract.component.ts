@@ -14,6 +14,7 @@ import { MatSelectCountryModule } from '@angular-material-extensions/select-coun
 import {ContractService} from "app/core/service/contract.service";
 import { MatDialog } from '@angular/material/dialog';
 import { SuccessComponent } from '@/layout/common/dialogs/responses/success/success_dialog';
+import { ErrorComponent } from '@/layout/common/dialogs/responses/error/error_dialog';
 
 
 @Component({
@@ -93,7 +94,7 @@ export class CreateContractComponent {
 
   })
 
-  percoContributionForm = this.formBuilder.group({
+  perecoContributionForm = this.formBuilder.group({
     rateSimpleContribution: ['', Validators.required],
     ceilingSimpleContribution: ['', Validators.required],
 		rateSeniorityContribution: ['', Validators.required],
@@ -110,10 +111,10 @@ export class CreateContractComponent {
 		ceilingIntervalContributionThird: ['', Validators.required],
 		rateIntervalContributionThird: ['', Validators.required],
 		intervalContributionThird: ['', Validators.required],
-		percoInterestAccepted: ['', Validators.required],
-		percoVoluntaryDepositAccepted: ['', Validators.required],
-		percoProfitSharingAccepted: ['', Validators.required],
-		percoTimeSavingAccountAccepted: ['', Validators.required],
+		perecoInterestAccepted: ['', Validators.required],
+		perecoVoluntaryDepositAccepted: ['', Validators.required],
+		perecoProfitSharingAccepted: ['', Validators.required],
+		perecoTimeSavingAccountAccepted: ['', Validators.required],
 
   })
 
@@ -149,13 +150,14 @@ export class CreateContractComponent {
           
         },
         peeContribution: this.peeContributionForm.value,
-        percoContribution: this.percoContributionForm.value
+        perecoContribution: this.perecoContributionForm.value
     }
-    
+
+
     
     this.contractService.createContract(newContract).subscribe(
         data=>{
-          console.log(data)
+    
           this.dialog.open(SuccessComponent, {
             data: {
               title: 'Contrat créé avec succès',
@@ -163,8 +165,14 @@ export class CreateContractComponent {
             },
           })
       },
-      error=>{
-        console.log(error)
+      errors=>{
+
+        this.dialog.open(ErrorComponent, {
+          data: {
+            title: 'Erreur serveur',
+            body:'le serveur a rencontré des erreurs'
+          },
+        })
         
       }
     )
