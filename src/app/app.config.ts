@@ -13,13 +13,14 @@ import { mockApiServices } from 'app/mock-api';
 import { TranslocoHttpLoader } from './core/transloco/transloco.http-loader';
 import { OAuthModule } from "angular-oauth2-oidc";
 import {HttpRequestInterceptor} from "@/core/interceptor/HttpRequestInterceptor";
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 
 export const appConfig: ApplicationConfig = {
 
     providers: [
         provideAnimations(),
         provideHttpClient(withInterceptors([HttpRequestInterceptor])),
-        importProvidersFrom(OAuthModule.forRoot()),
+        importProvidersFrom(OAuthModule.forRoot(), MatSelectCountryModule.forRoot('fr')),
         provideRouter(appRoutes,
             withPreloading(PreloadAllModules),
             withInMemoryScrolling({scrollPositionRestoration: 'enabled'}),
