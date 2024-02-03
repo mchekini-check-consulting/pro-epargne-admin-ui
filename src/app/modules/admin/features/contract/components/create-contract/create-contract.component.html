@@ -3,7 +3,7 @@
 
     <div class="bg-zinc-300 w-3/5 mt-5 rounded-3xl pt-5">
         <h1 class="text-2xl text-center">Création du contrat</h1>
-        <mat-stepper class="bg-zinc-100 m-5 p-5 rounded-3xl" #stepper linear="false">
+        <mat-stepper class="bg-zinc-100 m-5 p-5 rounded-3xl" #stepper linear="true">
             <mat-step [stepControl]="companyForm">
                 <form [formGroup]="companyForm">
                     <ng-template matStepLabel>Information sur l'entreprise</ng-template>
@@ -115,10 +115,8 @@
                     <div class="flex">
                         <div class="w-1/2">
                             <mat-form-field class="w-2/3">
-                                <!-- <mat-label>Choose a date</mat-label> -->
                                 <input matInput [matDatepicker]="picker2" placeholder="Date de naissance"
                                     formControlName="dateOfBirth">
-                                <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
                                 <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
                                 <mat-datepicker #picker2></mat-datepicker>
                             </mat-form-field>
@@ -400,7 +398,7 @@
                     <!-- end of PEE plan -->
                 </form>
 
-                <form [formGroup]="percoContributionForm">
+                <form [formGroup]="perecoContributionForm">
                     <!-- PERCO plan -->
                     <div *ngIf="percoChecked">
                         <mat-divider></mat-divider>
@@ -414,14 +412,17 @@
                             </div>
 
                             <div class="w-2/3">
-                                <mat-checkbox class="example-margin" formControlName="percoInterestAccepted">sur sur
+                                <mat-checkbox class="example-margin" formControlName="perecoInterestAccepted">sur sur
                                     l'intéressement</mat-checkbox>
-                                <mat-checkbox class="example-margin" formControlName="percoVoluntaryDepositAccepted">sur
+                                <mat-checkbox class="example-margin"
+                                    formControlName="perecoVoluntaryDepositAccepted">sur
                                     les versements volontaires</mat-checkbox>
-                                <mat-checkbox class="example-margin" formControlName="percoProfitSharingAccepted">sur la
+                                <mat-checkbox class="example-margin" formControlName="perecoProfitSharingAccepted">sur
+                                    la
                                     participation</mat-checkbox>
                                 <mat-checkbox class="example-margin"
-                                    formControlName="percoTimeSavingAccountAccepted">Compte épargne temps</mat-checkbox>
+                                    formControlName="perecoTimeSavingAccountAccepted">Compte épargne
+                                    temps</mat-checkbox>
                             </div>
                         </div>
 
