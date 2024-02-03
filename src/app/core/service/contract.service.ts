@@ -18,4 +18,9 @@ export class ContractService {
         const url = `/api/v1/contracts/${id}`;
         return this.http.get<Contract>(url);
     }
+
+    createContract(contract:Object){
+      const url = "/api/v1/contract"
+      return this.http.post(url,contract);
+    }
 }

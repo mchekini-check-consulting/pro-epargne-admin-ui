@@ -18,4 +18,8 @@ export class ContractComponent
         this.router.navigate(['/features/contract/consult-contract.ts']);
     }
 
+    createContract():void{
+        this.router.navigate(['/features/contract/create-contract.ts']);
+    }
+
 }
