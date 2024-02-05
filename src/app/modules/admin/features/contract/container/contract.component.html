@@ -1,17 +1,15 @@
-<div class="container w-full  pt-5 ">
+<div class="container pt-5 w-full  flex flex-row content-center">
+    <mat-card (click)="createContract()" class="mat-card w-1/2 h-1/2 m-2 rounded-2xl bg-gradient-to-r from-gray-200 via-gray-50 to-gray-200">
+        <mat-icon class="mat-icon-size">add_circle</mat-icon>
+        <mat-card-actions class="place-content-center mat-card-actions  py-8">
+            <button mat-button class="text-4xl">Création contrat</button>
+        </mat-card-actions>
+    </mat-card>
 
-
-    <div class="flex flex-col">
-
-        <div class="text-center">
-            <button mat-raised-button color="primary" class="my-5" (click)="createContract()">Création contrat</button>
-        </div>
-
-        <div class="text-center">
-            <button mat-raised-button color="primary" class="my-5" (click)="consultContract()">Consulter Mon
-                Contrat</button>
-
-        </div>
-    </div>
-
+    <mat-card (click)="consultContract()" class="mat-card w-1/2 h-1/2 m-2 rounded-2xl bg-gradient-to-r from-gray-200 via-gray-50 to-gray-200">
+        <mat-icon class="mat-icon-size" aria-hidden="false" aria-label="contract">assignment</mat-icon>
+        <mat-card-actions class="place-content-center mat-card-actions py-8">
+            <button mat-button class="text-4xl">Consulter Mon contrat</button>
+        </mat-card-actions>
+    </mat-card>
 </div>

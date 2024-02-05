@@ -10,6 +10,7 @@ import {Contract} from "@/core/model/app-contract-plan";
     standalone: true,
     imports: [CommonModule, MatExpansionModule, MatCardModule],
     templateUrl: './consult-contract.component.html',
+    styleUrl:"./consult-contract.component.scss"
 
 })
 export class ConsultContractComponent implements OnInit{
@@ -28,13 +29,10 @@ export class ConsultContractComponent implements OnInit{
     getContractPlan(id:number): void {
         this.contractService.getContractPlans(id)
             .subscribe(
-                (contract: Contract) => {
-                    this.contractsPlan = contract;
-
+                (contracts: Contract) => {
+                    this.contractsPlan = contracts;
                 },
-                (error) => {
-
-                }
+                (error) => {}
             );
     }
 

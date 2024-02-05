@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    font-family: "Roboto", sans-serif;
+
+
+}
+
+.mat-card {
+    flex: 1;
+    max-width: 48%;
+    max-height: 50%;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+
+
+}
+
+
+
+.mat-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.mat-icon-size {
+    scale:3;
+
+}
+
+.mat-card-actions {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.text-3xl {
+    font-size: 1.5rem;
+    justify-content: center;
+
+}
+
+@media (max-width: 768px) {
+    .mat-card {
+        max-width: 100%;
+    }
+}

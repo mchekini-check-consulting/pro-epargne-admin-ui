@@ -1,0 +1,49 @@
+.td-pading {
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+
+}
+
+.td-double-pading {
+    padding-left: 20px;
+    padding-top: 3px;
+
+}
+
+
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-family: "Roboto", sans-serif;
+}
+
+.text-gray{
+    color: #6c757d;
+}
+
+.title-size{
+    font-size: 1.5rem;
+}
+
+.subtitle-size{
+    font-size: 1.2rem;
+    width: 20rem;
+}
+.simple-text-size{
+    font-size: 1rem;
+    width: 10.5rem;
+}
+
+.item {
+    flex: 1 0 45%;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 2344px) {
+    .item {
+        flex: 1 0 40%;
+    }
+}
