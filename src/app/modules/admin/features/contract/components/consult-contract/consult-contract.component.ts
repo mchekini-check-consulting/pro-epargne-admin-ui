@@ -23,11 +23,11 @@ export class ConsultContractComponent implements OnInit{
     }
 
     ngOnInit(): void {
-        this.getContractPlan(1);
+        this.getContractPlan();
     }
 
-    getContractPlan(id:number): void {
-        this.contractService.getContractPlans(id)
+    getContractPlan(): void {
+        this.contractService.getContractPlans()
             .subscribe(
                 (contracts: Contract) => {
                     this.contractsPlan = contracts;

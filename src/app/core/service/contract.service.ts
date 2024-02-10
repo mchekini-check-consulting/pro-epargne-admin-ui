@@ -14,8 +14,8 @@ export class ContractService {
 
 
 
-    getContractPlans(id: number): Observable<Contract> {
-        const url = `/api/v1/contract/${id}`;
+    getContractPlans(): Observable<Contract> {
+        const url = `/api/v1/contract`;
         return this.http.get<Contract>(url);
     }
 
