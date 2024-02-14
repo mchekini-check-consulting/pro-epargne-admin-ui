@@ -151,7 +151,7 @@
 
                     <div class="mt-2">
                         <mat-radio-group aria-label="Select an option" formControlName="executive">
-                            <label for="">Le signataire est-il dirigeant? </label>
+                            <label>Le signataire est-il dirigeant? </label>
                             <mat-radio-button value="true">oui</mat-radio-button>
                             <mat-radio-button value="false">non</mat-radio-button>
                         </mat-radio-group>
@@ -159,7 +159,7 @@
 
                     <div class="mt-2">
                         <mat-radio-group aria-label="Select an option" formControlName="eligibility">
-                            <label for="">Éligibilité au dispositif par ancienneté? </label>
+                            <label>Éligibilité au dispositif par ancienneté? </label>
                             <mat-radio-button value="1">1 moi</mat-radio-button>
                             <mat-radio-button value="2">2 mois</mat-radio-button>
                             <mat-radio-button value="3">3 mois</mat-radio-button>
@@ -216,7 +216,7 @@
                         <div class="w-1/2 mt-2">
                             <mat-form-field class="w-2/3">
 
-                                <mat-select placeholder="Type d'abondement"
+                                <mat-select [(value)]="selectedAbondementTypePEE" placeholder="Type d'abondement"
                                     (selectionChange)="onAbondementPeeTypeChange($event)">
                                     <mat-option value="sm">Simple</mat-option>
                                     <mat-option value="pl">Par paliers</mat-option>
@@ -428,7 +428,7 @@
 
                         <div class="w-1/2 mt-2">
                             <mat-form-field class="w-2/3">
-                                <mat-select placeholder="Type d'abondement"
+                                <mat-select [(value)]="selectedAbondementTypePERCO" placeholder="Type d'abondement"
                                     (selectionChange)="onAbondementPercoTypeChange($event)">
                                     <mat-option value="sm">Simple</mat-option>
                                     <mat-option value="pl">Par paliers</mat-option>

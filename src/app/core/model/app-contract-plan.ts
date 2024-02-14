@@ -1,9 +1,40 @@
 export interface Contract {
     contractId: number;
+    createdAt: string;
+    closingMonth: string;
+    eligibility: string;
+    company: Company;
+    companySignatory: CompanySignatory;
     peeContribution:PeePlan;
     perecoContribution: PerecoPlan;
 }
 
+export interface CompanySignatory {
+    lastName: string;
+    firstName: string;
+    jobTitle: string;
+    email: string;
+    phone: string;
+    socialSecurityNumber: string;
+    countryOfBirth: string;
+    countryOfResidence: string;
+    dateOfBirth: string;
+    executive: boolean;
+
+}
+
+
+export interface Company {
+    siren: string;
+    companyName: string;
+    address: string;
+    siret: string;
+    businessAddress: string;
+    businessActivity: string;
+    workforce: number;
+    totalWages: number;
+    legalForm: string;
+}
 
 export interface PeePlan {
 
