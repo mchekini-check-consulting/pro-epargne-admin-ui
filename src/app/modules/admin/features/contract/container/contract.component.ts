@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {Router} from '@angular/router';
 import {MatCardModule} from "@angular/material/card";
@@ -12,10 +12,13 @@ import {MatIconModule} from "@angular/material/icon";
     standalone: true,
     imports: [MatButtonModule, MatCardModule, MatIconModule],
 })
-export class ContractComponent {
+export class ContractComponent implements OnInit {
     constructor(private router: Router) {
     }
 
+    ngOnInit() {
+
+    }
 
     consultContract(): void {
         this.router.navigate(['/features/contract/consult-contract.ts']);
