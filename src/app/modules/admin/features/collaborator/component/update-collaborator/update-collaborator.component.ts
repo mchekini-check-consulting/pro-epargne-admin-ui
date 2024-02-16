@@ -1,5 +1,5 @@
-import { CollaboratorService } from '@/core/service/collaborator.service';
 import { CollaboratorType } from '@/core/model/collaborator.type';
+import { CollaboratorService } from '@/core/service/collaborator.service';
 import { CommonModule, formatDate } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 
@@ -22,6 +22,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
+import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { catchError, take } from 'rxjs';
 
@@ -45,6 +46,7 @@ import { catchError, take } from 'rxjs';
         ReactiveFormsModule,
         MatDatepickerModule,
         MatRadioModule,
+        MatIconModule,
     ],
     templateUrl: './update-collaborator.component.html',
     styleUrl: './update-collaborator.component.scss',

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { OAuthService } from "angular-oauth2-oidc";
@@ -9,10 +10,11 @@ import { UserService } from "./core/user/user.service";
     templateUrl: './app.component.html',
     styleUrls  : ['./app.component.scss'],
     standalone : true,
-    imports    : [RouterOutlet],
+    imports    : [RouterOutlet,CommonModule],
 })
 export class AppComponent
 {
+    isLoading:boolean = true
     /**
      * Constructor
      */
@@ -26,6 +28,7 @@ export class AppComponent
             this.email = this.oauthService.getIdentityClaims()['email'];
             // @ts-ignore
             this.userService._user.next({name : this.name, email : this.email});
+            this.isLoading = false
         })
     }
 }

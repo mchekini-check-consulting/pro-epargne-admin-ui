@@ -1,0 +1,89 @@
+<div class="w-full p-5 mat-elevation-z8">
+    <p class="pt-5 pb-5 text-2xl">Abondements à traiter</p>
+
+    <mat-form-field class="w-50 sm:w-100">
+        <mat-label>Filter par type plan</mat-label>
+        <mat-select
+            [formControl]="typeControl"
+            (selectionChange)="onFilter($event.value)"
+        >
+            <mat-option
+                *ngFor="let option of operationTypes"
+                [value]="option.value"
+            >
+                {{ option.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <table class="w-full" mat-table [dataSource]="dataSource">
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef>Versements effectués</th>
+            <td mat-cell *matCellDef="let row">
+                Versement du {{ row.createdAt | date : "dd/MM/yyyy" }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef>Montant à abonder</th>
+            <td mat-cell *matCellDef="let row">
+                {{ row.contribution.amount }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="planType">
+            <th mat-header-cell *matHeaderCellDef>Plan d'épargne</th>
+            <td mat-cell *matCellDef="let row">{{ row.planType }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Statut</th>
+            <td mat-cell *matCellDef="let row">
+                <p
+                    [ngClass]="
+                        row.contribution.status === 'PENDING'
+                            ? 'text-red-600'
+                            : 'text-green-600'
+                    "
+                >
+                    {{ statusOption?.[row?.contribution.status] }}
+                </p>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let row">
+                <button
+                    mat-raised-button
+                    color="primary"
+                    class="w-full max-w-28"
+                    *ngIf="row.contribution.status === 'PENDING'"
+                    (click)="updateContribution(row)"
+                >
+                    Abonder
+                </button>
+                <button
+                    mat-button
+                    color="warn"
+                    class="w-full max-w-28 pointer-events-none"
+                    *ngIf="row.contribution.status !== 'PENDING'"
+                >
+                    <mat-icon>close</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+    </table>
+
+    <mat-paginator
+        [pageSizeOptions]="[10, 15, 20]"
+        [length]="totalElements"
+        (page)="onPageChange($event)"
+        [pageIndex]="params.page"
+        [pageSize]="params.size"
+        showFirstLastButtons
+        class="flex justify-end"
+    ></mat-paginator>
+</div>

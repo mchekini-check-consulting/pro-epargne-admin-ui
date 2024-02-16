@@ -23,6 +23,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon : 'heroicons_outline:clipboard-document-check',
                 link : '/features/contract',
             },
+            {
+                id   : 'features.contribution',
+                title: 'Abondements à traiter',
+                type : 'basic',
+                icon : 'heroicons_outline:presentation-chart-line',
+                link : '/features/contribution',
+            },
         ],
     },
     {
