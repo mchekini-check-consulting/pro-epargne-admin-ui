@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: admin.pro-epargne-ingress
+    annotations:
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+    ingressClassName: nginx
+    rules:
+        - host: admin.pro-epargne.check-consulting.net
+          http:
+              paths:
+                  - pathType: Prefix
+                    path: /
+                    backend:
+                        service:
+                            name: pro-epargne-admin-ui
+                            port:
+                                number: 80
+                  -   pathType: Prefix
+                      path: /api
+                      backend:
+                          service:
+                              name: pro-epargne-api
+                              port:
+                                  number: 8080
+    tls:
+        - hosts:
+              - admin.pro-epargne.check-consulting.net
+          secretName: admin.pro-epargne.check-consulting.net.tls

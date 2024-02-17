@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  labels:
+    app.kubernetes.io/instance: pro-epargne
+    app.kubernetes.io/name: pro-epargne
+  name: pro-epargne-admin-tls
+  namespace: pro-epargne
+spec:
+  dnsNames:
+    - admin.pro-epargne.check-consulting.net
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: lets-encrypt-prd
+  secretName: admin.pro-epargne.check-consulting.net.tls
+  usages:
+    - digital signature
+    - key encipherment
