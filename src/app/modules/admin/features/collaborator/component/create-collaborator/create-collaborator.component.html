@@ -1,4 +1,12 @@
-<h1 mat-dialog-title style="text-align: center;">Ajout d'un employé</h1>
+<div mat-dialog-title>
+    <div class="pb-4 flex justify-between items-baseline">
+        <h1 class="text-2xl font-semibold">Ajout d'un employé</h1>
+        <button mat-icon-button color="warn" mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>
+
 <mat-dialog-content class="mat-typography">
     <form
         [formGroup]="formData"
@@ -91,7 +99,9 @@
             </mat-form-field>
         </div>
         <div mat-dialog-actions class="flex justify-end">
-            <button mat-button color="primary" type="submit">Créer l'utilisateur</button>
+            <button mat-raised-button color="primary" type="submit">
+                Créer l'utilisateur
+            </button>
         </div>
     </form>
     <h1
