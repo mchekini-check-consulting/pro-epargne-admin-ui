@@ -14,7 +14,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { Subject, catchError, takeUntil } from 'rxjs';
 
-type ParamsType = { page: number; size: number; planType: string };
+type ParamsType = { page: number; size: number; planType: string; status };
 
 @Component({
     selector: 'app-contribution',
@@ -44,16 +44,18 @@ export class ContributionComponent implements OnInit, OnDestroy {
         'Action',
     ];
 
-    statusOption = {
-        APPROVED: 'Traité',
-        PENDING: 'Non traité',
-    };
-
     typeControl = new FormControl('');
+    statusControl = new FormControl('');
     operationTypes = [
         { value: '', name: 'Tous les types' },
         { value: 'PEE', name: 'Pee' },
         { value: 'PERECO', name: 'Pereco' },
+    ];
+
+    statusOptions = [
+        { value: '', name: 'Tous les types' },
+        { value: 'APPROVED', name: 'Traité' },
+        { value: 'PENDING', name: 'Non traité' },
     ];
 
     totalElements = 0;
@@ -61,6 +63,7 @@ export class ContributionComponent implements OnInit, OnDestroy {
         page: 0,
         size: 10,
         planType: '',
+        status: '',
     };
 
     constructor(
@@ -68,11 +71,17 @@ export class ContributionComponent implements OnInit, OnDestroy {
         private dialog: MatDialog
     ) {}
 
+    getStatus(status: 'APPROVED' | 'PENDING') {
+        return this.statusOptions.find((option) => option.value === status)
+            .name;
+    }
+
     onParamsUpdate(paramUpdate: Partial<ParamsType>) {
         this.params = {
             page: paramUpdate?.page ?? this.params.page,
             size: paramUpdate?.size ?? this.params.size,
             planType: paramUpdate?.planType ?? this.params.planType,
+            status: paramUpdate?.status ?? this.params.status,
         };
     }
 
@@ -92,7 +101,21 @@ export class ContributionComponent implements OnInit, OnDestroy {
     }
 
     onFilter(planType: string): void {
-        this.onParamsUpdate({ page: 0, size: 10, planType });
+        this.onParamsUpdate({
+            page: 0,
+            size: 10,
+            planType,
+            status: this.params.status,
+        });
+        this.contributionService.get(this.params).subscribe();
+    }
+    onStatusChange(status: string): void {
+        this.onParamsUpdate({
+            page: 0,
+            size: 10,
+            planType: this.params.planType,
+            status,
+        });
         this.contributionService.get(this.params).subscribe();
     }
 

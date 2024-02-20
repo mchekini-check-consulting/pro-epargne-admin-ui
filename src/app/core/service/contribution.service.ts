@@ -4,7 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, ReplaySubject, tap } from 'rxjs';
 
-type GetParams = { page: number; size: number; planType: string };
+type GetParams = {
+    page: number;
+    size: number;
+    planType: string;
+    status: string;
+};
 
 @Injectable({
     providedIn: 'root',
